@@ -8,3 +8,17 @@
       '("marmalade"."http://marmalade-repo.org/packages/"))
 
   之后M-x: package-list-packages搜索go-mode, 点击安装即可
+** marmalade
+   该网站的地址： http://marmalade-repo.org/
+   可以将该网址添加到.emacs文件中，用于emacs的插件管理
+   如果使用的不是emacs24, 需要先安装package.el，
+   代码如下：
+   (require 'package)
+   (add-to-list 'package-archives 
+    '("marmalade" .
+      "http://marmalade-repo.org/packages/"))
+   (package-initialize)
+** elpa
+   elpa的作用同marmalade
+   使用方法是，在.emacs文件中添加如下代码：
+   (add-to-list 'package-archives '("elpa". "http://tromey.com/elpa/"))
