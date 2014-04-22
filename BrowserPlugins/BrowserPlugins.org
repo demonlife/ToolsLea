@@ -1,0 +1,6 @@
+* Chrome 插件
+** 代码管理插件
+*** 代码片管理插件
+    代码片管理使用github的gist，其对应的chrome浏览器插件名是：
+    gistbox: https://chrome.google.com/webstore/detail/gistbox/caoihfibgoiiakncomhccbflmlgjaohf
+    gistbox clipper: https://chrome.google.com/webstore/detail/gistbox-clipper/cejmhmbmafamjegaebkjhnckhepgmido
