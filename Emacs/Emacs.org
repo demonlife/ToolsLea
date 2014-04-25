@@ -22,3 +22,6 @@
    elpa的作用同marmalade
    使用方法是，在.emacs文件中添加如下代码：
    (add-to-list 'package-archives '("elpa". "http://tromey.com/elpa/"))
+* Emacs 的快捷键
+** 执行shell命令
+   alt + |
