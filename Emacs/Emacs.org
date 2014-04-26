@@ -96,7 +96,6 @@
     (require 'ecb)
     (require 'ecb-autoloads)
     之后启动emacs, 打开一个源文件选择菜单栏中的tool->Start code Browser(ECB)
-    
 **** 错误解决
      1. if symbol's value as variable is void stack-trace-on-error
         (setq stack-trace-on-error t)
