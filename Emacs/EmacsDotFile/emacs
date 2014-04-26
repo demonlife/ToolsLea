@@ -75,13 +75,23 @@
 (global-srecode-minor-mode 1)            ; Enable template insertion menu
 
 ;; folding C/C++ code
-(require 'semantic-tag-folding)
-(defun c-folding-hook ()
-  (global-semantic-tag-folding-mode 1)
-  (local-set-key (kbd "C-c <left>") 'semantic-tag-folding-fold-block)
-  (local-set-key (kbd "C-c <right>") 'semantic-tag-folding-show-block)
-)
-(add-hook 'c-mode-common-hook 'c-folding-hook)
+;(require 'semantic-tag-folding)
+;(defun c-folding-hook ()
+;  (global-semantic-tag-folding-mode 1)
+;  (local-set-key (kbd "C-c <left>") 'semantic-tag-folding-fold-block)
+;  (local-set-key (kbd "C-c <right>") 'semantic-tag-folding-show-block)
+;)
+;(add-hook 'c-mode-common-hook 'c-folding-hook)
+
+(require 'semantic-tag-folding nil 'noerror)
+(global-semantic-tag-folding-mode 1)
+;; 折叠代码
+(define-key semantic-tag-folding-mode-map (kbd "C-c -") 'semantic-tag-folding-fold-block)
+(define-key semantic-tag-folding-mode-map (kbd "C-c =") 'semantic-tag-folding-show-block) 
+
+;; 整个buffer所有函数折叠与展开
+(define-key semantic-tag-folding-mode-map (kbd "C-c . -") 'semantic-tag-folding-fold-all)
+(define-key semantic-tag-folding-mode-map (kbd "C-c . =") 'semantic-tag-folding-show-all)
 
 ;; ecb
 (add-to-list 'load-path "~/.emacs.d/plugins/ecb-2.40") ;;设置找到匹配的隐藏
