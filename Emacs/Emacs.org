@@ -8,7 +8,33 @@
       '("marmalade"."http://marmalade-repo.org/packages/"))
 
   之后M-x: package-list-packages搜索go-mode, 点击安装即可
-** marmalade
+* Emacs 的快捷键
+** 一些常用的快捷键
+   C-x C-q: 让当前buffer在只读和可编辑状态中改变
+** 执行shell命令
+   alt + |
+** 绑定键的设置
+   M-x global-set-key RET交互绑定键, 根据提示操作
+   C-x Esc Esc: 调出上一条执行的命令
+   
+* Emacs 的安装与设置
+** 安装
+*** Ubuntu下安装
+    1. 首先设置update manager可以允许安装pre-released updates和
+       Usupported updates
+    2. 添加ppa软件源
+       ppa全称为personal package archives(个人软件包档案), 是Ubuntu Launchpad网站
+       提供的一项服务, 不仅限于Launchpad. 通常ppa源里的软件是官方源里没有的, 或者是
+       最新版本的软件. 相对于deb安装包来说, 使用ppa的好处是, 一旦软件有更新, 可以通
+       过sudo apt-get upgrade这样的命令可以直接升级到新版本.
+       1. 设置ppa
+          可以在goolge里搜索 软件名称关键词+ ppa, 或者到launchpad.net上搜索, 
+          搜索到之后可以直接添加, sudo apt-add-repository ppa-url, 可以在搜索结果
+          页搜索关键词add字样, 型如ppa:xxx的基本就是
+    3. 执行sudo apt-get update, sudo apt-get install softname
+          
+** 设置
+*** marmalade
    该网站的地址： http://marmalade-repo.org/
    可以将该网址添加到.emacs文件中，用于emacs的插件管理
    如果使用的不是emacs24, 需要先安装package.el，
@@ -18,10 +44,77 @@
     '("marmalade" .
       "http://marmalade-repo.org/packages/"))
    (package-initialize)
-** elpa
-   elpa的作用同marmalade
-   使用方法是，在.emacs文件中添加如下代码：
-   (add-to-list 'package-archives '("elpa". "http://tromey.com/elpa/"))
-* Emacs 的快捷键
-** 执行shell命令
-   alt + |
+*** elpa
+    elpa的作用同marmalade
+    使用方法是，在.emacs文件中添加如下代码：
+    (add-to-list 'package-archives '("elpa". "http://tromey.com/elpa/"))
+*** 插件安装
+    首先执行package-list-packages, 然后搜索需要安装的软件名称
+    现在推荐安装的插件如下:
+    lua-mode: 书写lua代码的插件
+    yasnippet: 自动不全的插件    
+** 手动安装插件
+   http://docs.huihoo.com/homepage/shredderyin/emacs_elisp.html
+*** ibbuffer.el
+    http://docs.huihoo.com/homepage/shredderyin/src/emacs-lisp/ibuffer.el
+    加入.emacs 的代码是:
+    (require 'ibuffer)
+    (global-set-key (kbd "C-x C-b") 'ibuffer) ;; C-x C-b触发该功能
+    可以对 buffer 进行各种标记，排序，隐藏，查找，替换
+    用 %-n 标记符合某种名字的 buffer，然 后按 "O" 在这些buffer里寻找我需要的字串
+*** 启用ido模式
+    可以使用 C-s，C-r 或者左右光标键在匹配的文件之间来回旋转，
+    按上下光标可以在匹配的目录名之间旋转. C-k 可以删除一个文件。
+    别担心，当删除文件时， 你会被要求做出明确的回答
+    如果你按 C-p 就会启动部分匹配，而不是严格前缀匹配。
+    这时只要文件名的一部分与你的输入匹配就会列在表中.
+
+    按C-t就会切换到正则表达式匹配方式，你输入的文字将被作为正则表达式对文件进行匹配 
+
+    按 C-b 就会切换到选择buffer模式。按 C-d 就会进入Dired
+
+    你如果要创建一个新的文件叫 "ab"，而你的目录里有匹配前缀的文件 或目录，
+    RET 就会打开部分匹配的文件。所以这个时候你必须按 C-j 来创建这 样一个文件。
+    如果没有匹配的文件，那么RET也会创建一个新的文件
+    
+    如果你想 把光标移动到行首修改一些东西，你必须按 C-e 进入编辑模式
+    
+    如果在不能匹配的时候按 M-s，ido 就会把所 路径合并，找到匹配文件 
+*** 安装cedit和ecb
+    到http://cedet.sourceforge.net/ 下载cedit包, 目前(14426)最新的是cedet-1.1.tar.gz
+    解压, 编译: make EMACS=emacs
+    .emacs配置文件添加如下内容:
+    (load-file "xx/cedet-1.1/common/cedet.el")
+    (global-ede-mode 1)
+    (semantic-load-enable-code-helpers)
+    (global-srecode-minor-mode 1)
+    semantic 的启用也可以在菜单栏中打开
+    安装ecb
+    到http://ecb.sourceforge.net/ 下载压缩包
+    解压, 在.emacs文件中添加如下内容:
+    (add-to-list 'load-path "xx/ecb-2.40")
+    (require 'ecb)
+    (require 'ecb-autoloads)
+    之后启动emacs, 打开一个源文件选择菜单栏中的tool->Start code Browser(ECB)
+    
+**** 错误解决
+     1. if symbol's value as variable is void stack-trace-on-error
+        (setq stack-trace-on-error t)
+     2. 如果打开emacs后弹出提示ecb-tip-of-the day的弹框
+        (setq ecb-tip-of-the-day nil)
+     3. CB can only be used with [1.0pre6, 1.0.9]! Please install it and restart Emacs!
+        进入到ecb目录下, 打开文件ecb-upgrade.el, 将ecb-check-requirements函数中的
+        如下代码注释:
+        ;; check if vedet-version is correct  
+        when (or (not (boundp 'cedet-version))  
+        (ecb-package-version-list<  
+        (ecb-package-version-str2list cedet-version)  
+        ecb-required-cedet-version-min)  
+        (ecb-package-version-list<  
+        ecb-required-cedet-version-max  
+        (ecb-package-version-str2list cedet-version)))  
+        (setq version-error (concat "cedet [" 
+        cedet-required-version-str-min  
+        ", " 
+        cedet-required-version-str-max  
+        "]")))  

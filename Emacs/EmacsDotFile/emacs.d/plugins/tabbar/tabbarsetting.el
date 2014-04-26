@@ -1,0 +1,5 @@
+(define-prefix-command 'lwindow-map)
+(global-set-key (kbd "C-1") 'tabbar-backward)
+(global-set-key (kbd "C-2") 'tabbar-forward)
+(global-set-key (kbd "C-3") 'tabbar-backward-group)
+(global-set-key (kbd "C-4") 'tabbar-forward-group)

@@ -1,0 +1,82 @@
+(add-to-list 'load-path "~/.emacs.d/base_conf") ;; 基本的配置
+
+(load "base.el")
+(load "ibus_setting.el")
+
+(add-to-list 'load-path "~/.emacs.d/plugins/evil") ;; 绑定vi的案件
+(require 'evil)
+(evil-mode 1)
+
+(require 'package)
+(add-to-list 'package-archives 
+             '("marmalade" .
+               "http://marmalade-repo.org/packages/"))
+(package-initialize)
+(add-to-list 'package-archives '("elpa". "http://tromey.com/elpa/"))
+
+(add-to-list 'load-path "~/.emacs.d/plugins/tabbar") ;;设置tabbar
+(require 'tabbar)
+(tabbar-mode 1)
+(load "tabbarsetting.el") ;; 键绑定设置
+
+
+;; 设置session, 菜单上会多两项：最近访问过的文件和最近 修改过的文件
+(add-to-list 'load-path "~/.emacs.d/plugins/session") ;;设置tabbar
+(require 'session)
+(add-hook 'after-init-hook 'session-initialize)
+
+;; 保存上次打开的文件记录，那么可以使用 desktop
+;; M-x desktop-save: 保存记录, desktop-clear:删除记住的内容
+(load "desktop")
+(desktop-load-default)
+(desktop-read)
+
+;; 把 C-x C-b 那个普通的 buffer menu 换成非常方便的 ibuffer
+(add-to-list 'load-path "~/.emacs.d/plugins/session") ;;设置tabbar
+(require 'ibuffer)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+(add-to-list 'load-path "~/.emacs.d/plugins") ;;设置tabbar
+(require 'browse-kill-ring)
+(global-set-key [(control c)(k)] 'browse-kill-ring)
+(browse-kill-ring-default-keybindings)
+
+(add-to-list 'load-path "~/.emacs.d/plugins/folding") ;;设置
+(load "foldingsetting.el")
+
+(add-to-list 'load-path "~/.emacs.d/plugins/hidefind") ;;设置找到匹配的隐藏
+;; hide region
+(require 'hide-region)
+(global-set-key (kbd "C-c r") 'hide-region-hide)
+(global-set-key (kbd "C-c R") 'hide-region-unhide)
+
+;; hide lines
+(require 'hide-lines)
+(global-set-key (kbd "C-c l") 'hide-lines)
+(global-set-key (kbd "C-c L") 'show-all-invisible)
+
+;; 启用semantic
+;(semantic-mode t)
+
+;; 设置semantic工程目录
+;(setq semanticdb-project-roots (list "/"))
+;(global-ede-mode 1)
+
+;(local-set-key "." 'semantic-complete-self-insert)
+;(local-set-key ">" 'semantic-complete-self-insert)
+;(add-hook 'speedbar-timer-hook
+;          (lambda ()
+;            (speedbar-refresh)))
+;(setq speedbar-verbosity-level 0)
+
+(load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el")
+(global-ede-mode 1)                      ; Enable the Project management system
+(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion 
+(global-srecode-minor-mode 1)            ; Enable template insertion menu
+
+;; ecb
+(add-to-list 'load-path "~/.emacs.d/plugins/ecb-2.40") ;;设置找到匹配的隐藏
+(require 'ecb)
+(require 'ecb-autoloads)
+(setq stack-trace-on-error t)
+(setq ecb-tip-of-the-day nil)
