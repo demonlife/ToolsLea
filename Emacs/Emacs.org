@@ -122,10 +122,10 @@
     2. make install, 建议使用make install DIR=$HOME/.emacs.d/auto-complete
     3. 编译安装完成之后, 将编译时的输出添加到.emacs文件中即可
 *** yasnippet 的安装
-    cd ~/.emacs.d/plugins
+    cd ~/.emacs.d
     git clone --recursive https://github.com/capitaomorte/yasnippet
 
     (add-to-list 'load-path
-              "~/.emacs.d/plugins/yasnippet")
+              "~/.emacs.d/yasnippet")
     (require 'yasnippet)
     (yas-global-mode 1)
