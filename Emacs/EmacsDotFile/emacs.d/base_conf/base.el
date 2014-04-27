@@ -203,3 +203,11 @@ file of a buffer in an external program."
          (newline))
      (insert file-name ":" (number-to-string file-line) ": ")))
 (global-set-key (kbd "C-x a") 'add-code-review-note)
+
+;;格式话整个文件函数,可以避免光标位置移动。
+(defun indent-buffer ()
+  "Indent the whole buffer."
+  (interactive)
+  (save-excursion
+    (indent-region (point-min) (point-max) nil)))
+(global-set-key [f7] 'indent-buffer)
