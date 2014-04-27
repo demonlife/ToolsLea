@@ -117,3 +117,15 @@
         ", " 
         cedet-required-version-str-max  
         "]")))  
+*** autocomplete的安装
+    1. 去官网http://cx4a.org/software/auto-complete/index.html 下载最新的版本
+    2. make install, 建议使用make install DIR=$HOME/.emacs.d/auto-complete
+    3. 编译安装完成之后, 将编译时的输出添加到.emacs文件中即可
+*** yasnippet 的安装
+    cd ~/.emacs.d/plugins
+    git clone --recursive https://github.com/capitaomorte/yasnippet
+
+    (add-to-list 'load-path
+              "~/.emacs.d/plugins/yasnippet")
+    (require 'yasnippet)
+    (yas-global-mode 1)

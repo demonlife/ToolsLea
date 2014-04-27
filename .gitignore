@@ -23,3 +23,6 @@
 # emacs auto gen files
 Emacs/EmacsDotFile/emacs.d/auto-save-list/*
 Emacs/EmacsDotFile/emacs.d/elpa/*
+*.dat
+Emacs/EmacsDotFile/emacs.d/auto-complete/*
+Emacs/EmacsDotFile/emacs.d/yasnippet/*
