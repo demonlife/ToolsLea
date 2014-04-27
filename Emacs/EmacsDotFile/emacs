@@ -143,3 +143,21 @@
               "~/.emacs.d/yasnippet")
 (require 'yasnippet)
 (yas-global-mode 1)
+
+;;80 character hilight
+(require 'highlight-80+)
+;;当某个扩展名的文件打开时,自动调用highlight-80+-mode
+(add-hook 'c-mode-common-hook   (lambda () (highlight-80+-mode t) ) )
+(add-hook 'text-mode-hook       (lambda () (highlight-80+-mode t) ) )
+(add-hook 'emacs-lisp-mode-hook (lambda () (highlight-80+-mode t) ) )
+(add-hook 'python-mode-hook     (lambda () (highlight-80+-mode t) ) )
+(add-hook 'javascript-mode-hook (lambda () (highlight-80+-mode t) ) )
+(add-hook 'html-mode-hook       (lambda () (highlight-80+-mode t) ) )
+(add-hook 'conf-mode-hook       (lambda () (highlight-80+-mode t) ) )
+(add-hook 'php-mode-hook        (lambda () (highlight-80+-mode t) ) )
+
+(add-to-list 'load-path "~/.emacs.d/plugins/rainbow-mode")
+(require 'rainbow-mode)
+(dolist (hook '(css-mode-hook
+        html-mode-hook))
+        (add-hook hook (lambda () (rainbow-mode t))))
