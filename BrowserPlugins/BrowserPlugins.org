@@ -4,3 +4,9 @@
     代码片管理使用github的gist，其对应的chrome浏览器插件名是：
     gistbox: https://chrome.google.com/webstore/detail/gistbox/caoihfibgoiiakncomhccbflmlgjaohf
     gistbox clipper: https://chrome.google.com/webstore/detail/gistbox-clipper/cejmhmbmafamjegaebkjhnckhepgmido
+* Safari 插件
+  Safari 浏览器的拓展功能分为扩展与插件两类，扩展可以为 Safari 增加提高其处理页面的能力，
+  增强网页的体验，而插件是用来处理多媒体资源，它的本质则是一个单独的应用程序
+
+  点击 Safari 偏好设置里的扩展选项卡，即可以看到当前安装的扩展插件
+  http://jianshu.io/p/5a9edd51bbce
