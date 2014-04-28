@@ -26,3 +26,5 @@ Emacs/EmacsDotFile/emacs.d/elpa/*
 *.dat
 Emacs/EmacsDotFile/emacs.d/auto-complete/*
 Emacs/EmacsDotFile/emacs.d/yasnippet/*
+Emacs/EmacsDotFile/emacs.d/Pymacs/*
+Emacs/EmacsDotFile/emacs.d/ropemacs/*
