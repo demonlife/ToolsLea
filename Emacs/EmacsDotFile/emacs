@@ -112,11 +112,12 @@
  ;; If there is more than one, they won't work right.
  )
  
+; use IPython start
+
 ;; ipython, C-c C-c 可以在ipython页面中查看结果
 (add-to-list 'load-path "~/.emacs.d/plugins/python-mode.el-6.1.3") 
 (require 'python-mode)
 
-; use IPython start
 (setq-default py-shell-name "ipython")
 (setq-default py-which-bufname "IPython")
 ; use the wx backend, for both mayavi and matplotlib
@@ -131,8 +132,26 @@
 (setq py-split-windows-on-execute-p nil)
 ; try to automagically figure out indentation
 (setq py-smart-indentation t)
-; use IPython end
 
+;(with-output-to-temp-buffer "*IPython Completions*"
+;  (display-completion-list
+;   (all-completions pattern completions)))
+;; use IPython end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; pymacs start
+(add-to-list 'load-path "~/.emacs.d/Pymacs")
+(autoload 'pymacs-apply "pymacs")
+(autoload 'pymacs-call "pymacs")
+(autoload 'pymacs-eval "pymacs" nil t)
+(autoload 'pymacs-exec "pymacs" nil t)
+(autoload 'pymacs-load "pymacs" nil t)
+(autoload 'pymacs-autoload "pymacs")
+; ropemacs
+(require 'pymacs)
+(pymacs-load "ropemacs" "rope-")
+;; pymacs end
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; auto-complete
 (add-to-list 'load-path "~/.emacs.d/auto-complete")
 (require 'auto-complete-config)
@@ -161,3 +180,8 @@
 (dolist (hook '(css-mode-hook
         html-mode-hook))
         (add-hook hook (lambda () (rainbow-mode t))))
+
+(require 'fill-column-indicator)        
+(define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+(global-fci-mode t)
+

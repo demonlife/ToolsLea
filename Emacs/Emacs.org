@@ -16,7 +16,11 @@
 ** 绑定键的设置
    M-x global-set-key RET交互绑定键, 根据提示操作
    C-x Esc Esc: 调出上一条执行的命令
-   
+** Python mode 下的快捷键
+   C-c !: Another window will be created, and in it should be an IPython interpreter
+   C-c C-c:  send an entire buffer at once into ipython and run it
+   在安装了pymacs， ropemacs后，Use M-/ to bring up a list of completions in the minibuffer
+   C-c d: 可以调出帮助文档
 * Emacs 的安装与设置
 ** 安装
 *** Ubuntu下安装
@@ -129,3 +133,32 @@
               "~/.emacs.d/yasnippet")
     (require 'yasnippet)
     (yas-global-mode 1)
+*** Pymacs and ropemacs
+    Pymacs is: it’s an interface between Python and Emacs LISP
+    rope, which is a non-Emacs-specific Python refactoring library.
+    Ropemacs is just the Emacs plugin for rope
+
+    to install, first install rope itsefl:
+    sudo aptitude install python-rope
+
+    download pymacs code from github:https://github.com/pinard/Pymacs/tree/v0.25
+    download ropemacs code from github: https://bitbucket.org/agr/ropemacs
+
+    先安装Pymacs： 进入目录，先执行 make; sudo make install; 然后执行sudo python setup.py install
+    再安装ropemacs: 进入目录，执行sudo python setup.py install， 如果报READEME.txt找不到，则
+    直接复制一份README.rst为README.txt即可。
+    之后在.emacs 中添加如下内容：
+    ; pymacs
+    (add-to-list 'load-path "~/.emacs.d/pymacs-0.25")
+    (autoload 'pymacs-apply "pymacs")
+    (autoload 'pymacs-call "pymacs")
+    (autoload 'pymacs-eval "pymacs" nil t)
+    (autoload 'pymacs-exec "pymacs" nil t)
+    (autoload 'pymacs-load "pymacs" nil t)
+    (autoload 'pymacs-autoload "pymacs")
+
+    ; ropemacs
+    (require 'pymacs)
+    (pymacs-load "ropemacs" "rope-")
+*** 界面优化-color theme
+    
