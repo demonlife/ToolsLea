@@ -1,3 +1,5 @@
+* Emacs基础
+  http://www.jesshamrick.com/2012/09/10/absolute-beginners-guide-to-emacs/
 * Emacs 安装 Go语言的支持
   http://sachachua.com/blog/2011/01/emacs-24-package-manager/
   添加如下代码进入.emacs
@@ -11,6 +13,7 @@
 * Emacs 的快捷键
 ** 一些常用的快捷键
    C-x C-q: 让当前buffer在只读和可编辑状态中改变
+   M-q： wrap the text
 ** 执行shell命令
    alt + |
 ** 绑定键的设置
@@ -19,8 +22,10 @@
 ** Python mode 下的快捷键
    C-c !: Another window will be created, and in it should be an IPython interpreter
    C-c C-c:  send an entire buffer at once into ipython and run it
+
    在安装了pymacs， ropemacs后，Use M-/ to bring up a list of completions in the minibuffer
    C-c d: 可以调出帮助文档
+   C-c g: 跳转到定义
 * Emacs 的安装与设置
 ** 安装
 *** Ubuntu下安装
