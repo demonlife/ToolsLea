@@ -26,7 +26,7 @@
 (setq kill-ring-max 500)
 
 ;; 将fill-column设为60
-(setq default-fill-column 60)
+(setq default-fill-column 80)
 
 ;;不产生备份文件
 (setq make-backup-files nil)
