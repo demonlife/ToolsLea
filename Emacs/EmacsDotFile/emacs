@@ -59,7 +59,7 @@
 ;(semantic-mode t)
 
 ;; 设置semantic工程目录
-;(setq semanticdb-project-roots (list "/"))
+(setq semanticdb-project-roots (list "/"))
 ;(global-ede-mode 1)
 
 ;(local-set-key "." 'semantic-complete-self-insert)
@@ -185,3 +185,20 @@
 (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
 (global-fci-mode t)
 
+(defun my-indent-or-complete ()
+   (interactive)
+   (if (looking-at "\\>")
+      (hippie-expand nil)
+      (indent-for-tab-command))
+ )
+
+(global-set-key [(control tab)] 'my-indent-or-complete)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 智能编译
+;; http://lifegoo.pluskid.org/wiki/EmacsSmartCompile.html
+(require 'smart-compile)
+(add-to-list 'smart-compile-alist
+             '("/home/demon/tmp/c/.*" . "make"))
+(global-set-key (kbd "<f9>") 'smart-compile)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
