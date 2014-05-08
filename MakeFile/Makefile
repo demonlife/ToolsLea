@@ -1,3 +1,6 @@
+# makfile 的一大原则就是，任何以tab键开始的语句都会当作命令来处理
+# 基于这一原则，因此判断语句就不能出现在目标的执行语句中
+
 run: test
 	@./test
 	@-rm test
@@ -104,6 +107,30 @@ ifeq ($(origin foo), undefined)
 foo = bar?
 endif
 
+# 变量替换 P34
+foo := a.o b.o c.o
+bar := $(foo:.o=.c)
+
+bar := $(foo:%.o=%.c) # 采用静态模式替换
+
+# 将变量的值当作变量使用
+x = y
+y = z
+a := ${${x}}
+
+# 追加变量 +=
+objects = main.o foo.o
+objects += another.o #等价于 objects := ${objects} another.o
+
+# override 指示符 P38
+override varo := beforeoverride
+
+# 多行变量
+define two-lines
+echo foo
+echo foo2
+endef
+
 printvar:
 	@echo ${foo}
 	@echo ${y}
@@ -111,5 +138,48 @@ printvar:
 	@echo ${z}
 	@echo ${cur-dir}
 	@echo ${varspace}
+	@echo ${bar}
+	@echo "a = "${a}
+	@echo "objects = "${objects}
+	@echo ${varo}
+	$(tow-lines)
 
+# 目标变量 p39
+# 语法规则，<target ... >: <variable-assigment>
+# 或者 <target ... >: override <variable-assigment
+
+#prog: CFLAGS = -g
+#	@echo $(CFLAGS) # 报错，无法执行
+
+# 模式变量
+# 语法如下：
+# <patter ... > : <variable-assigment>
+# <patter ... > : override <variable-assigment>
+
+# 函数调用 P43
+# 为了规则的统一，函数和变量的括号最好一样，函数中的参数可以使用变量，
+# 参数间使用逗号分割，函数名和参数间使用空格分割。函数调用以$符号开头
+# 例如：
+comma := ,
+empty :=
+space := $(empty) $(empty)
+foo := a b c
+bar := $(subst $(space), $(comma), $(foo))
+funtest:
+	@echo $(bar)
+	@echo a/$(space)/a
+
+# origin 函数 P51， origin的返回值：P51
+
+# Shell 函数 P53
+# shell函数把执行操作系统命令后的输出作为函数返回，因此可以用操作系统命令以及
+# 字符串处理命令awk，sed等等
+# 该函数会新生成一个shell程序来执行命令，因此对性能有一定的影响。
+# 例如:
+content := $(shell cat foo)
+
+# make 的运行 P54
+# make 命令执行后有3个退出码
+# 0： 成功执行， 1：make运行时出现任何错误，
+# 2：使用了make -q选项，并且make使得一些目标不需要更新
 
