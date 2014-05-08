@@ -78,3 +78,38 @@ subsytem:
 # 变量传递 P29
 
 # 定义命令包 P30
+
+# 变量使用时需要使用()/{}包围起来，变量可以使用后面的变量来定义
+foo = ${bar}
+bar = ${ugh}
+ugh = Huh?
+
+# foo1 = ${bar1}
+# bar1 = ${foo1}
+# 变量会陷入无限的展开过程中，make是有能力检测到这样的定义，并会报错
+# 为避免上面的问题，可以使用 := 来定义变量
+z := ${x} zz # 不会获取x的值
+x := foo
+y := ${x} bar
+x := later
+
+ifeq (${MAKELEVEL}, 0)
+cur-dir := $(shell pwd) # 不能用tab前开头，否则可能会出现错误
+varwithspace := /foo/bar # varwithspace will has a space
+varspace := ${varwithspace}test
+endif
+
+foo ?= bar? # 等价于如下语句
+ifeq ($(origin foo), undefined)
+foo = bar?
+endif
+
+printvar:
+	@echo ${foo}
+	@echo ${y}
+	@echo ${x}
+	@echo ${z}
+	@echo ${cur-dir}
+	@echo ${varspace}
+
+
