@@ -23,7 +23,12 @@
   为".c"是 make 所能识别的后缀名,所以,"$*"的值就是"foo"。这个特性是 GNU make 的,
   很有可能不兼容于其它版本的 make,所以,你应该尽量避免使用"$*",除非是在隐含规则
   或是静态模式中。如果目标中的后缀是 make 所不能识别的,那么"$*"就是空值
-
+* 赋值
+  https://stackoverflow.com/questions/448910/makefile-variable-assignment
+  var = value 在调用时赋值
+  var := value 在申明时赋值
+  var ?= value 调用时查看变量是否已赋值，对未赋值的变量进行赋值
+  var += value 在变量后追加一些值，赋值方式要看最初使用了=还是:=
 
 
 
