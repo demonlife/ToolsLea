@@ -1,0 +1,5 @@
+* Shadowsocks
+  http://jianshu.io/p/08ba65d1f91a
+  shadowsocks实质上也是一种socks5代理服务，类似于ssh代理。与vpn的全局代理不同，
+  shadowsocks仅针对浏览器代理，不能代理应用软件，比如youtube、twitter客户端软件。
+  
