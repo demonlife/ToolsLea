@@ -1,0 +1,7 @@
+* zsh 利用文件扩展名调用对应的工具打开文件
+  在zshrc文件中添加如下代码：
+  alias -s pdf="evince"
+  alias -s html="google-chrome"
+  alias -s bz2="tar jxf"
+  alias -s gz="tar zxf"
+  
