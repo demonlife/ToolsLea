@@ -38,15 +38,21 @@
     x命令内存输出格式：
     d：十进制，u：十进制无符号，x：16进制，o：8进制，t：2进制，c：字符
     set variable：可用来修改变量的值， set variable a=100
-*** 内存及寄存器
+*** 内存及寄存器/x命令
     x命令可以显示指定地址的内存数据
     格式：x/nfu [address]，
     n：显示内存单位（组或者行），f：格式，除了print格式外，还有字符串s和汇编i
     u：内存单位，b：1字节，h：2字节， w：4字节，g：8字节
     x/8w 0x0804843b //按4字节显示8组内存数据
     x/8i 0x0804843b // 显示8行汇编指令
+    x/x //以16进制输出
+    x/d //以10进制输出
+    x/c //以单子符输出
+    x/s //以字符串输出
     info registers // 显示所有寄存器数据
     p $eax // 显示单个寄存器的值
+    在打印一个序列化过的结构体， 如果序列太长，往往会被gdb省略掉，此时可以设置
+    set print elements 0即可
 *** 反汇编代码
     set disassembly-flavor intel // 设置反汇编指令的格式
     disass funname // 反汇编funname函数
@@ -71,4 +77,38 @@
 
     gdb test core，此时最后几行提示会告诉我们错误的原因和代码位置，接下来就是gdb的
     技巧了，可以先输入where查看调用堆栈，info files 查看信息
+    
+** GDB中应该知道的几个调试方法
+   http://coolshell.cn/articles/3643.html
+*** 多线程调试
+    最重要的几个命令如下：
+    info thread: 查看当前进程的线程
+    thread <ID>: 切换调试的线程为指定ID的线程
+    break file.c:100 thread all 在file.c文件第100行处为所有经过这里的线程设置断点
+    set scheduler-locking off|on|step:
+    off 不锁定任何线程，也就是所有线程都执行，这是默认值
+    on 只有当前被调试程序会执行
+    step 在单步的时候，除了next过一个函数的情况(熟悉情况的人可能知道，这其实是一个设置断点然后continue的行为)以外，只有当前线程会执行
+*** 调试宏
+    在GCC 编译程序时，加上-ggdb3参数，就可以调试宏了
+    info macro 可以查看这个宏在哪些文件里被引用了，以及宏定义
+    macro - 可以查看宏展开的样子
+*** 条件断点
+    语法： break [where] if [condition]
+*** 命令行参数
+    gdb命令行中的 -args 参数
+    gdb环境中set args命令
+    gdb环境中，run 后加参数，如：run 1 2或则 (r 1 2)
+*** gdb的变量
+    gdb中的变量就像shell一样，gdb中的变量以$开头，例如：
+    set $i = 0
+    p a[$i++]
+*** command命令
+    将一组gdb命令打包，例如：
+    break func
+    command 1
+    print arg1
+    print arg2
+    print arg3
+    end
     
