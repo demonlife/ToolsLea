@@ -1,3 +1,8 @@
+* zshell的安装
+  sudo aptitude install zsh
+  git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+  cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+  chsh -s `which zsh`
 * zsh 利用文件扩展名调用对应的工具打开文件
   在zshrc文件中添加如下代码：
   alias -s pdf="evince"
