@@ -166,4 +166,5 @@
     (require 'pymacs)
     (pymacs-load "ropemacs" "rope-")
 *** 界面优化-color theme
-    
+* Emacs 中使用Ctrl + Space 调出fcitx
+  在bashrc中输入export LC_CTYPE=zh_CN.UTF-8，之后从终端启动emacs即可
