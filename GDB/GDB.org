@@ -70,6 +70,10 @@
     disass funname // 反汇编funname函数
     可以用b *address设置汇编断点，然后用si和ni进行汇编级单步执行，这对于分析指针和
     寻址非常有用
+    info symbol addr：通过地址反过来查询该地址对应的内容
+    info addr name：通过name可以获取其地址
+    反汇编的另外一种方法是使用x， 当程序运行后，可以使用如下命令：
+    x/3i $pc
 *** 进程
     help info proc stat
     info proc mappings // 等价于 cat /proc/{pid}/maps
@@ -135,5 +139,31 @@
     conti：表示继续执行程序
 
     之后可以运行run，直接运行程序了
-    
-    
+** 将GDB的调试信息输出到文件
+   打开日志文件，默认的文件名时gdb.txt
+   set logging on
+   查看更多有关logging设置相关的帮助，可以用如下指令：
+   help set logging
+   如果日志输出过长，导致滚屏发生的话，程序会停下来等待人工干预，为了使commands中的命令可以一直
+   执行下去，需要输入如下命令：
+   set pagination off
+   如果gdb输出的内容过多，可以使用shell clear来清屏
+   如果源代码发生了变化，想在gdb中直接调用相关的命令进行编译：
+   shell gcc -o hello -g hello.c
+   将最新的目标文件再次载入到gdb中： file hello
+** 通过gdb调试来探秘helloworld最先是从main函数执行的吗？
+   源码如下：
+   #include <stdio.h>
+   #include <stdlib.h>
+   
+   int main(int argc, char *argv[]) {
+   printf("hello, world\n");
+   return 0;
+   }
+
+   在main函数中打一个断点，使用bt显示调用堆栈
+   可以使用info frame可以进一步的显示frame的信息，注意两个register的只，分别保存rbp和rip。
+   saved rip表示main被调用前的代码，可以用x来看看具体的函数名
+   也可以使用info symbol addr，至此可以断定main函数被__libc_start_main调用
+   此时可以使用disassemble __libc_start_main来反汇编该函数
+   
