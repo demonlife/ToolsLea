@@ -115,7 +115,7 @@
     gdb中的变量就像shell一样，gdb中的变量以$开头，例如：
     set $i = 0
     p a[$i++]
-*** command命令
+*** command/commands命令
     将一组gdb命令打包，例如：
     break func
     command 1
@@ -123,4 +123,17 @@
     print arg2
     print arg3
     end
+
+    使用commands命令循环打印某个变量的值
+    commands
+    silent
+    p i
+    conti
+    end
+    解释： 输入end表示结束commands命令，回到gdb
+    p i：打印i的值
+    conti：表示继续执行程序
+
+    之后可以运行run，直接运行程序了
+    
     
