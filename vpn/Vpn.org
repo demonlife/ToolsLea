@@ -2,4 +2,12 @@
   http://jianshu.io/p/08ba65d1f91a
   shadowsocks实质上也是一种socks5代理服务，类似于ssh代理。与vpn的全局代理不同，
   shadowsocks仅针对浏览器代理，不能代理应用软件，比如youtube、twitter客户端软件。
-  
+* google
+  1. 配置host
+     72.14.203.106 www.google.com.hk
+     66.249.89.91 mail.google.com
+     74.125.79.109 pop.gmail.com
+     74.125.79.109 smtp.gmail.com
+  2. 免翻墙网址
+     https://s3-ap-southeast-1.amazonaws.com/google.cn/index.html
+     免翻墙镜像：https://github.com/greatfire/wiki
