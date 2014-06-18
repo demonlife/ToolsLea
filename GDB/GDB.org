@@ -82,7 +82,7 @@
     info thread // 查看所有线程列表
     thread 1 // 切换线程
 *** 其他
-    set follow-fork-mode child
+    set follow-fork-mode child：在fork之后跟踪子进程， child换成parent则跟踪父进程
     shell // 临时进入shell执行命令，exit返回
     call test("abc") // 调试时直接调用函数
     gdb --tui hello // 在终端窗口上显示一个源代码查看窗口
