@@ -1,0 +1,12 @@
+* script
+  script是将终端会话制成打印稿的命令。对于想重现终端输入输出历史的人来说，十分管用。
+  而且，这些记录还能被保存或打印。
+** 使用
+   script：启动script，默认存入当前目录下的typescript文件中
+   script filename: 启动script，存入当前目录下filename文件中
+   script -a filename: 追加记录
+   ctrl+d/exit: 停止记录
+** 配置文件
+   如果使用的是bash，在~/.profile文件中，添加如下记录：
+   /usr/bin/script -qa filename
+   -q：是安静模式
