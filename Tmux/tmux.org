@@ -1,0 +1,49 @@
+* tmux的使用
+** 安装
+   aptitude install tmux
+** 使用
+   tmux: 启动tmux，创建一个会话，但没有为会话命名 exit/ctrl+d：退出tmux
+   tmux new-sessioni -s <name>: 创建一个名为name的会话
+   tmux new -s <name>: 同上
+   tmux new -s <name> 初始命令： 创建会话时，带上一个初始命令，例如:tmux new -s monitor top
+   可以看到会话创建后，会自动运行top命令，但是一旦退出top程序，会话也会自动退出，因此初始命令
+   不常用。
+   tmux new -s <name> -n <windowname>: 在创建会话时给窗口指定一个名称, 在oh-my-zsh中，可能会显示不出来
+*** 新建窗口
+    在tmux的会话中， <前缀> c：新建窗口，一个会话可以创建多个窗口
+*** 切换窗口
+    <前缀> p:上一个窗口， <前缀> n:下一个窗口
+    <前缀> 0-9的数字：切换到指定的窗口，
+    如果窗口太多，可以通过<前缀> w唤出窗口列表，用上下键可进行选择
+*** 更改窗口名称
+    <前缀> ,: 更改窗口名称
+*** 关闭窗口
+    <前缀> &:
+*** 切分窗格
+    一个窗口可以切分为多个窗格， 主要的切分方法有两种，垂直和水平
+    <前缀> %:垂直切割， <   前缀> ": 水平分割
+    切换工作窗格： <前缀> o:在当前窗口的所有窗格中轮流切换, 按制定方向切换窗格：[前缀] 方向键
+*** 更换窗格布局
+    tmux 有五个默认的窗格布局，可以满足基本的工作需要。
+    水平平分（even-horizontal）
+    垂直平分（even-vertical）
+    主窗格最大化，其他窗格水平平分（main-horizontal）
+    主窗格最大化，其他窗格垂直平分（main-vertical）
+    平铺，窗格均等分（tiled）
+    更换窗格布局： [前缀] 空格, 在这五个默认的窗格布局之中轮流切换
+*** 分离会话
+    快捷键是：ctrl+b d, 其中ctrl+b表示前缀
+*** 连接会话
+    tmux attach-session -t <目标会话>/tmux attach -t <目标会话>
+    tmux a -t <目标会话>
+    例如：tmux a -t dev
+    如果只有一个会话，则可以用tmux a来连接，并且如果不指定目标会话，tmux将会连接上次使用的会话，
+*** 查看会话
+    tmux list-sessions/tmux ls: 查看会话状态
+    如果没有创建会话或者会话都全已退出，那么列出所有会话的命令将会提示一个 failed to connect to server 的信息，
+    可以看得出来 tmux 是有运行一个服务的，这个服务管理着所有的会话，并让他们持续运行
+   
+   
+*** tmux 滚屏
+    在tmux界面中按下<前缀>+b [,此时就可以用光标来翻页了。
+    如果需要兼容vim的操作方式，可以在tmux的配置文件.tmux.conf加上一行：setw -g mode-keys vi
