@@ -1,0 +1,8 @@
+* Ubuntu软件与主题推荐
+  http://jianshu.io/p/617e4388d814
+** Comix 漫画软件
+   可以在软件中心中下载
+** Synapse
+   一款类似于alfred的软件
+   
+  
