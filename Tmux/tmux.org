@@ -42,8 +42,6 @@
     tmux list-sessions/tmux ls: 查看会话状态
     如果没有创建会话或者会话都全已退出，那么列出所有会话的命令将会提示一个 failed to connect to server 的信息，
     可以看得出来 tmux 是有运行一个服务的，这个服务管理着所有的会话，并让他们持续运行
-   
-   
 *** tmux 滚屏
     在tmux界面中按下<前缀>+b [,此时就可以用光标来翻页了。
     如果需要兼容vim的操作方式，可以在tmux的配置文件.tmux.conf加上一行：setw -g mode-keys vi

@@ -1,0 +1,31 @@
+* vim 入门
+  http://jianshu.io/p/bcbe916f97e1
+* 普通用户启动的VIM保存root权限文件
+  http://feihu.me/blog/2014/vim-write-read-only-file/
+** 解决方法一
+   :w !sudo tee %
+   分析：
+   首先在vim中查看vim的帮助文档 :help :w
+   把这个使用方法对应前面的命令，
+   :       w               !sudo tee %
+   |       |               |  |
+   :[range]w[rite] [++opt] !{cmd}
+   ! ： 表示其后面的命令是外部命令，利用该功能可以在不退出vim的情况下将结果读入到vim
+   中，例如： :r !pwd #将当前路径读入vim中
+   :w 并未真正的保存当前文件，就像执行:w new-file-name时， 它将当前文件的内容保存到另外一个
+   new-file-name的文件中，将当前文档的内容写入到后面cmd的标准输入中，在执行cmd，因此
+   整个命令可以转换为一个具有相同功能的普通shell命令：
+   cat readonly-file-name | sudo tee %
+   %: 在执行外部命令时，%会扩展成当前文件名， 执行 :help cmdline-special可以看到相关的解释
+   如果需要查看替换时%的用处可以使用 :help :%
+** 方法二-映射
+   在.vimrc中，添加如下命令: cmap w!! w !sudo tee > /dev/null %
+** 另一种思路
+   为什么不用下面这种更常见的命令： :w !sudo cat > %
+   会报“权限不够”错误，原因是：在重定向时， 它是shell执行的，在一切命令开始之前，shell便会
+   重定向操作，因此重定向未受sudo影响。
+*** 重定向方案
+    https://stackoverflow.com/questions/82256/how-do-i-use-sudo-to-redirect-output-to-a-location-i-dont-have-permission-to-wr
+    上述链接解决了重定向无权限错误的方法， 一种比较方便的方案是以sudo打开一个shell，然后
+    在该具有roo权限的shell中执行含重定向的命令， 如： :w !sudo sh -c "cat > %"， 注意此处
+    需要使用""， ""与''的区别如下：https://stackoverflow.com/questions/6697753/difference-between-single-and-double-quotes-in-bash

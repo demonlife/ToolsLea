@@ -12,6 +12,7 @@
   git commit -m "first commit"
   git remote add origin https://github.com/demonlife/demonlife.github.io.git
   git push -u origin master
+  git remote rm origin #删除origin
 ** push an existing repository
    git remote add origin https://github.com/demonlife/demonlife.github.io.git
    git push -u origin master
