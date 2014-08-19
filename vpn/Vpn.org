@@ -11,3 +11,12 @@
   2. 免翻墙网址
      https://s3-ap-southeast-1.amazonaws.com/google.cn/index.html
      免翻墙镜像：https://github.com/greatfire/wiki
+* 翻墙软件
+  http://boafanx.tabboa.com/
+  软件下载在百度网盘，GFWtools-boafanx.7z， 解压密码:boafanx
+  免费的ssh账号: http://boafanx.tabboa.com/free/
+  1号服务器（美国-堪萨斯）
+  SSH服务器：208.110.83.242
+  SSH端口：1266
+  SSH账号：boa
+  SSH密码：eyo3
