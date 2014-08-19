@@ -168,3 +168,35 @@
 *** 界面优化-color theme
 * Emacs 中使用Ctrl + Space 调出fcitx
   在bashrc中输入export LC_CTYPE=zh_CN.UTF-8，之后从终端启动emacs即可
+* Emacs 中预览Markdown
+  https://panqiincs.github.io/blog/2013/05/07/emacs-markdown-command/
+** pandoc的安装与启用
+   安装： sudo aptitude install pandoc
+   之后在/usr/bin目录下建立一个markdown文件，赋予执行权限，内容如下
+   pandoc -f markdown -t html -s --mathjax --highlight-style --ascii pygments $1
+** emacs 启用markdown
+   emacs markdown mode下载地址： http://jblevins.org/projects/markdown-mode/
+   然后将markdown的路径放到emacs的load-path中，
+   (add-to-list 'load-path "~/.emacs.d/plugins/markdown-mode")
+   (autoload 'markdown-mode "markdown-mode"
+       "Major mode for editing Markdown files" t)
+   (add-to-list 'auto-mode-alist '("\\.markdown\\'". markdown-mode))
+   (add-to-list 'auto-mode-alist '("\\.md\\'". markdown-mode))
+** 简单的使用
+   C-c C-c m:转化为HTML，在另一个buffer中预览
+   C-c C-c p:转化为html，在浏览器中预览
+   C-c C-a l:插入[]()形式的连接，
+   C-c C-a L:插入[linktext][label]形式的连接，该形式下，会在minibuffer中提示输入信息
+   C-c C-i i / C-c C-i I:插入图片, 中括号中的内容会显示在页面，如果需要给图片添加alt信息，
+   则只需要在连接后面接一个空格和对应的信息即可,例如: ![](pic url "titlt"), 图片连接不能
+   使用""包起来
+   列表可以用: *, +, -, 如果是有数字的列表则使用数字加上英文的小数点
+   #h1#:与html中的h1等价
+   ##h2##:与html中的h2等价， 前导的#个数是1-6，后面#的个数不一定要与前一致，但至少需要一个
+   #多余6个就不会当做h标签了。
+   多个标签之间需要使用多余的空行来隔开，否则显示会有问题
+   标题下加====等价与h1
+   标题下加----等价与h2
+** 在emacs中显示本地连接的图片
+   http://everet.org/2013/01/emacs-markdown-display-image.html
+   
